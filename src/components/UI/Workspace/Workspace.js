@@ -1,11 +1,8 @@
 import { useContext, useState, useEffect } from "react";
-import { Context } from "./../../../context/store";
 
 import styles from "./Workspace.module.css";
 
 const Workspace = ({ note, initNote, addNote }) => {
-  console.log("Workspace render");
-
   const [titleNote, setTitleNote] = useState(note.title);
   const [textNote, setTextNote] = useState(note.text);
   const [isSave, setIsSave] = useState(false);
@@ -25,8 +22,8 @@ const Workspace = ({ note, initNote, addNote }) => {
         setIsSave(true);
         setTimeout(() => {
           setIsSave(false);
-        }, 3000);
-      }, 3000);
+        }, 1000);
+      }, 1000);
       return () => {
         clearTimeout(debounse);
       };

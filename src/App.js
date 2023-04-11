@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Context } from "./context/store";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./components/UI/Sidebar/Sidebar";
 import Workspace from "./components/UI/Workspace/Workspace";
 import Layout from "./components/UI/Layout/Layout";
@@ -58,10 +57,20 @@ const App = () => {
     setSelectNote(noteList.filter((item) => item.id == noteList.length - 1)[0]);
   }, [noteList]);
 
+  const filterHandler = (search_text) => {
+    const filtredNote = noteList.filter((item) =>
+      item.title.includes(search_text)
+    );
+    if (filtredNote.length) {
+      setNoteList(filtredNote);
+      console.log(filtredNote);
+    }
+  };
+
   return (
     <Layout>
       <Toolbar>
-        <SearchBox />
+        {/* <SearchBox onChangeSearchText={filterHandler} /> */}
       </Toolbar>
       <Sidebar>
         {noteList.map((item) => {
@@ -75,7 +84,6 @@ const App = () => {
           );
         })}
       </Sidebar>
-
       <Workspace
         initNote={initNote}
         note={selectNote}
