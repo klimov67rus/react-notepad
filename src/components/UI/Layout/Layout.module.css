@@ -1,0 +1,14 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  min-height: calc(100vh - 60px);
+  width: 1000px;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  align-content: flex-start;
+  justify-content: flex-start;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+}
