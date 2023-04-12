@@ -2,8 +2,8 @@
 
 ## Использованные технологии
 
--React
--IndexedDB (Dexie)
+- React
+- IndexedDB (Dexie)
 
 ## Функционал
 
