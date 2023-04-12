@@ -1,95 +1,45 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "./components/UI/Sidebar/Sidebar";
-import Workspace from "./components/UI/Workspace/Workspace";
-import Layout from "./components/UI/Layout/Layout";
-import Toolbar from "./components/UI/Toolbar/Toolbar";
-import SearchBox from "./components/UI/SearchBox/SearchBox";
-import ListItem from "./components/ListItem/ListItem";
+import { format_date } from "./functions/date";
+import Dexie from "dexie";
+import { useLiveQuery } from "dexie-react-hooks";
+
+import "./app.css";
+
+const db = new Dexie("NotesDb");
+db.version(1).stores({
+  notes: "++id, title, text, date",
+});
+
+const { notes } = db;
 
 const App = () => {
-  const date_now = new Date();
-  const date_minutes =
-    date_now.getMinutes() < 10
-      ? `0${date_now.getMinutes()}`
-      : date_now.getMinutes();
-  const time_now = `${date_now.getHours()}:${date_minutes}`;
-
-  const initNote = {
-    id: 0,
-    title: "Новая заметка",
-    date: time_now,
-    text: "No additional text",
-  };
-
-  const [noteList, setNoteList] = useState([initNote]);
-  const [selectNote, setSelectNote] = useState(initNote);
-
-  const onSelectNoteHandler = (id) => {
-    setSelectNote(noteList.filter((item) => item.id == id)[0]);
-  };
-
-  const addNoteHandler = (note) => {
-    const newID = noteList.length;
-
-    if (selectNote.id == 0) {
-      setNoteList((prev) => [
-        ...prev,
-        {
-          ...note,
-          id: newID,
-          date: time_now,
-        },
-      ]);
-    } else {
-      setNoteList((prevNoteList) => {
-        return prevNoteList.map((item) => {
-          if (item.id == selectNote.id) {
-            item.title = note.title;
-            item.text = note.text;
-          }
-          return item;
-        });
-      });
-    }
-  };
-
-  useEffect(() => {
-    setSelectNote(noteList.filter((item) => item.id == noteList.length - 1)[0]);
-  }, [noteList]);
-
-  const filterHandler = (search_text) => {
-    const filtredNote = noteList.filter((item) =>
-      item.title.includes(search_text)
-    );
-    if (filtredNote.length) {
-      setNoteList(filtredNote);
-      console.log(filtredNote);
-    }
-  };
+  const allNotes = useLiveQuery(() => notes.toArray(), []);
 
   return (
-    <Layout>
-      <Toolbar>
-        {/* <SearchBox onChangeSearchText={filterHandler} /> */}
-      </Toolbar>
-      <Sidebar>
-        {noteList.map((item) => {
-          return (
-            <ListItem
-              isSelect={selectNote.id}
-              onSelectNote={onSelectNoteHandler}
-              key={item.id}
-              item={item}
-            />
-          );
-        })}
-      </Sidebar>
-      <Workspace
-        initNote={initNote}
-        note={selectNote}
-        addNote={addNoteHandler}
-      />
-    </Layout>
+    <div className="notes container">
+      <div className="notes__toolbar">Toolbar</div>
+      <div className="notes__list">
+        <div className="notes__item note">
+          <div className="note__title">Новая заметка</div>
+          <div className="note__options">
+            <div className="note__date">12:17</div>
+            <div className="note__text">No additional text</div>
+          </div>
+        </div>
+      </div>
+      <div className="notes__content">
+        <form className="notes__form content-form">
+          <div className="content-form__row">
+            <label className="content-form__label">Название</label>
+            <input className="content-form__field" id="title" />
+          </div>
+          <div className="content-form__row">
+            <label className="content-form__label">Текст</label>
+            <textarea className="content-form__field" id="text"></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 
