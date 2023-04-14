@@ -1,5 +1,0 @@
-.sidebar{
-  flex-basis: 25%;
-  height: calc(100vh - 110px);
-  border-right: 1px solid #e7e7e7;
-}
