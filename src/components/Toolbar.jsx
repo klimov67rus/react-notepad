@@ -1,4 +1,4 @@
-const Toolbar = ({ onCreate }) => {
+const Toolbar = ({ onCreate, filterNotes }) => {
   return (
     <div className="notes__toolbar toolbar">
       <div className="toolbar__row">
@@ -8,7 +8,11 @@ const Toolbar = ({ onCreate }) => {
       </div>
       <div className="toolbar__row">
         <label className="toolbar__label">Поиск:</label>
-        <input className="toolbar__field" id="search" />
+        <input
+          className="toolbar__field"
+          id="search"
+          onChange={(e) => filterNotes(e.target.value)}
+        />
       </div>
     </div>
   );

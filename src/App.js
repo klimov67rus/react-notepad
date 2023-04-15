@@ -56,13 +56,22 @@ const App = () => {
     setNotes(notes.filter((note) => note.id !== id));
   };
 
+  // FILTER
+
+  const filterNotesHandler = (searchQuery) => {
+    const filtredNotes = notes.filter((note) =>
+      note.title.includes(searchQuery)
+    );
+    console.log(filtredNotes);
+  };
+
   useEffect(() => {
     !notes.length && setSelectNote(false);
   }, [notes]);
 
   return (
     <div className="notes container">
-      <Toolbar onCreate={createNoteHandler} />
+      <Toolbar onCreate={createNoteHandler} filterNotes={filterNotesHandler} />
       <NoteList
         notes={notes}
         deleteNoteHandler={deleteNoteHandler}
