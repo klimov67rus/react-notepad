@@ -15,10 +15,6 @@ db.version(1).stores({
 });
 
 const { notes: allItems } = db;
-// db.notes.add({
-//   [fieldname]: e.target.value,
-//   date: new Date(),
-// });
 
 const App = () => {
   const [filterQuery, setFilterQuery] = useState("");
@@ -26,7 +22,7 @@ const App = () => {
     async () => await allItems.where("title").startsWith(filterQuery).toArray(),
     [filterQuery]
   );
-  // const [notes, setNotes] = useState(notes);
+
   const [selectNote, setSelectNote] = useState(false);
 
   useEffect(() => {
@@ -38,24 +34,13 @@ const App = () => {
     const newNote = {
       title: "Новая заметка",
       text: "",
-      // id: uuid(),
       date: new Date(),
     };
-    //setNotes([...notes, newNote]);
     allItems.add(newNote);
   };
 
   // UPDATE
   const updateNotesHandler = (updateNote) => {
-    // setNotes((prev) =>
-    //   prev.map((note) => {
-    //     if (note.id == updateNote.id) {
-    //       return updateNote;
-    //     }
-    //     return note;
-    //   })
-    // );
-
     allItems.update(updateNote.id, {
       title: updateNote.title,
       text: updateNote.text,
@@ -65,8 +50,6 @@ const App = () => {
 
   // DELETE NOTE
   const deleteNoteHandler = (id) => {
-    //setNotes(notes.filter((note) => note.id !== id));
-
     allItems.delete(id);
   };
 

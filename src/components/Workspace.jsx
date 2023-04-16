@@ -1,3 +1,4 @@
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 const Workspace = ({ selectNote, updateNotes, setSelectNote }) => {
   const changeNote = (value, field) => {
     const Note = {
@@ -32,7 +33,9 @@ const Workspace = ({ selectNote, updateNotes, setSelectNote }) => {
       </form>
       <div className="preview">
         <div className="preview__title">{selectNote.title}</div>
-        <div className="preview__text">{selectNote.text}</div>
+        <ReactMarkdown className="preview__text">
+          {selectNote.text}
+        </ReactMarkdown>
       </div>
     </div>
   ) : (
