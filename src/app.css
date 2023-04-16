@@ -5,7 +5,7 @@ html {
   --gray-light: #e9e9e9;
 }
 .container {
-  max-width: 750px;
+  max-width: 1000px;
   margin: var(--outer-margin) auto;
 }
 .notes {
@@ -16,15 +16,15 @@ html {
   border-radius: 0.5rem;
 }
 .notes__list {
-  flex-basis: 25%;
+  width: 25%;
   min-height: var(--min_h);
   border-right: 1px solid var(--gray);
 }
 .notes__content {
-  flex-basis: 75%;
+  width: 75%;
 }
 .notes__toolbar {
-  flex-basis: 100%;
+  width: 100%;
   min-height: 50px;
   background-color: var(--gray);
 }
