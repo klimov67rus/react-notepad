@@ -1,3 +1,5 @@
+import RemoveMarkdown from "remove-markdown";
+
 const NoteList = ({ notes, selectNote, setSelectNote, deleteNoteHandler }) => {
   return (
     <div className="notes__list">
@@ -11,7 +13,11 @@ const NoteList = ({ notes, selectNote, setSelectNote, deleteNoteHandler }) => {
               onClick={() => setSelectNote(note)}
             >
               <div className="note__top">
-                <div className="note__title">{note.title.substr(0, 20)}</div>
+                <div className="note__title">
+                  {note.text !== ""
+                    ? RemoveMarkdown(note.text.substr(0, 20))
+                    : "Без имени.."}
+                </div>
                 <button
                   type="button"
                   className="note__delete"
@@ -28,7 +34,6 @@ const NoteList = ({ notes, selectNote, setSelectNote, deleteNoteHandler }) => {
                     minute: "2-digit",
                   })}
                 </div>
-                {/* <div className="note__text">{note.text.substr(0, 30)}</div> */}
               </div>
             </div>
           ))

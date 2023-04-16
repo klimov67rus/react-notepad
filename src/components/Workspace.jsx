@@ -1,4 +1,5 @@
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+
 const Workspace = ({ selectNote, updateNotes, setSelectNote, formVisible }) => {
   const changeNote = (value, field) => {
     const Note = {
@@ -13,7 +14,7 @@ const Workspace = ({ selectNote, updateNotes, setSelectNote, formVisible }) => {
     <div className="notes__content">
       {formVisible ? (
         <form className="notes__form content-form">
-          <div className="content-form__row">
+          {/* <div className="content-form__row">
             <label className="content-form__label">Название</label>
             <input
               className="content-form__field"
@@ -21,12 +22,12 @@ const Workspace = ({ selectNote, updateNotes, setSelectNote, formVisible }) => {
               value={selectNote.title}
               onChange={(e) => changeNote(e.target.value, "title")}
             />
-          </div>
+          </div> */}
           <div className="content-form__row">
-            <label className="content-form__label">Текст</label>
             <textarea
               className="content-form__field"
               id="text"
+              placeholder="Введите текст..."
               value={selectNote.text}
               onChange={(e) => changeNote(e.target.value, "text")}
             ></textarea>
@@ -34,7 +35,6 @@ const Workspace = ({ selectNote, updateNotes, setSelectNote, formVisible }) => {
         </form>
       ) : (
         <div className="preview">
-          <div className="preview__title">{selectNote.title}</div>
           <ReactMarkdown className="preview__text">
             {selectNote.text}
           </ReactMarkdown>
