@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Dexie from "dexie";
-import uuid from "react-uuid";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import "./app.css";
@@ -24,6 +23,7 @@ const App = () => {
   );
 
   const [selectNote, setSelectNote] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
 
   useEffect(() => {
     notes && !notes.length && setSelectNote(false);
@@ -55,7 +55,13 @@ const App = () => {
 
   return (
     <div className="notes container">
-      <Toolbar onCreate={createNoteHandler} setFilterQuery={setFilterQuery} />
+      <Toolbar
+        onCreate={createNoteHandler}
+        setFilterQuery={setFilterQuery}
+        selectNote={selectNote}
+        formVisible={formVisible}
+        setFormVisible={setFormVisible}
+      />
       <NoteList
         notes={notes}
         deleteNoteHandler={deleteNoteHandler}
@@ -63,6 +69,7 @@ const App = () => {
         setSelectNote={setSelectNote}
       />
       <Workspace
+        formVisible={formVisible}
         selectNote={selectNote}
         setSelectNote={setSelectNote}
         updateNotes={updateNotesHandler}

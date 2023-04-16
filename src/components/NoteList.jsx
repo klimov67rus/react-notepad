@@ -28,7 +28,7 @@ const NoteList = ({ notes, selectNote, setSelectNote, deleteNoteHandler }) => {
                     minute: "2-digit",
                   })}
                 </div>
-                <div className="note__text">{note.text.substr(0, 30)}</div>
+                {/* <div className="note__text">{note.text.substr(0, 30)}</div> */}
               </div>
             </div>
           ))
