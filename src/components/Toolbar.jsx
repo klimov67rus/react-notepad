@@ -1,4 +1,4 @@
-const Toolbar = ({ onCreate, filterNotes }) => {
+const Toolbar = ({ onCreate, setFilterQuery }) => {
   return (
     <div className="notes__toolbar toolbar">
       <div className="toolbar__row">
@@ -11,7 +11,7 @@ const Toolbar = ({ onCreate, filterNotes }) => {
         <input
           className="toolbar__field"
           id="search"
-          onChange={(e) => filterNotes(e.target.value)}
+          onChange={(e) => setFilterQuery(e.target.value)}
         />
       </div>
     </div>

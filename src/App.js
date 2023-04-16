@@ -14,64 +14,65 @@ db.version(1).stores({
   notes: "++id, title, text, date",
 });
 
+const { notes: allItems } = db;
 // db.notes.add({
 //   [fieldname]: e.target.value,
 //   date: new Date(),
 // });
 
-// const notesList = useLiveQuery(
-//   () => db.notes.where("title").startsWith(search).toArray(),
-//   [search]
-// );
-
 const App = () => {
-  const [notes, setNotes] = useState([]);
+  const [filterQuery, setFilterQuery] = useState("");
+  const notes = useLiveQuery(
+    async () => await allItems.where("title").startsWith(filterQuery).toArray(),
+    [filterQuery]
+  );
+  // const [notes, setNotes] = useState(notes);
   const [selectNote, setSelectNote] = useState(false);
+
+  useEffect(() => {
+    notes && !notes.length && setSelectNote(false);
+  }, [notes]);
 
   /* CREATE NEW NOTE */
   const createNoteHandler = () => {
     const newNote = {
       title: "Новая заметка",
       text: "",
-      id: uuid(),
+      // id: uuid(),
       date: new Date(),
     };
-    setNotes([...notes, newNote]);
+    //setNotes([...notes, newNote]);
+    allItems.add(newNote);
   };
 
   // UPDATE
   const updateNotesHandler = (updateNote) => {
-    setNotes((prev) =>
-      prev.map((note) => {
-        if (note.id == updateNote.id) {
-          return updateNote;
-        }
-        return note;
-      })
-    );
+    // setNotes((prev) =>
+    //   prev.map((note) => {
+    //     if (note.id == updateNote.id) {
+    //       return updateNote;
+    //     }
+    //     return note;
+    //   })
+    // );
+
+    allItems.update(updateNote.id, {
+      title: updateNote.title,
+      text: updateNote.text,
+      date: updateNote.date,
+    });
   };
 
   // DELETE NOTE
   const deleteNoteHandler = (id) => {
-    setNotes(notes.filter((note) => note.id !== id));
+    //setNotes(notes.filter((note) => note.id !== id));
+
+    allItems.delete(id);
   };
-
-  // FILTER
-
-  const filterNotesHandler = (searchQuery) => {
-    const filtredNotes = notes.filter((note) =>
-      note.title.includes(searchQuery)
-    );
-    console.log(filtredNotes);
-  };
-
-  useEffect(() => {
-    !notes.length && setSelectNote(false);
-  }, [notes]);
 
   return (
     <div className="notes container">
-      <Toolbar onCreate={createNoteHandler} filterNotes={filterNotesHandler} />
+      <Toolbar onCreate={createNoteHandler} setFilterQuery={setFilterQuery} />
       <NoteList
         notes={notes}
         deleteNoteHandler={deleteNoteHandler}
