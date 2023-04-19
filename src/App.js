@@ -23,10 +23,12 @@ const App = () => {
   );
 
   const [selectNote, setSelectNote] = useState(false);
-  const [formVisible, setFormVisible] = useState(false);
+  const [formVisible, setFormVisible] = useState(true);
 
   useEffect(() => {
-    notes && !notes.length && setSelectNote(false);
+    if (notes && !notes.length) {
+      setSelectNote(false);
+    }
   }, [notes]);
 
   /* CREATE NEW NOTE */
@@ -35,7 +37,14 @@ const App = () => {
       text: "",
       date: new Date(),
     };
-    allItems.add(newNote);
+    allItems
+      .add(newNote)
+      .then((createNoteId) => {
+        return allItems.get(createNoteId);
+      })
+      .then((createNote) => {
+        setSelectNote(createNote);
+      });
   };
 
   // UPDATE
@@ -48,23 +57,24 @@ const App = () => {
 
   // DELETE NOTE
   const deleteNoteHandler = (id) => {
-    allItems.delete(id);
+    const answer = window.confirm("Are you sure?");
+    if (answer) allItems.delete(id);
   };
 
   return (
     <div className="notes container">
       <Toolbar
         onCreate={createNoteHandler}
-        setFilterQuery={setFilterQuery}
         selectNote={selectNote}
         formVisible={formVisible}
         setFormVisible={setFormVisible}
+        deleteNoteHandler={deleteNoteHandler}
       />
       <NoteList
         notes={notes}
-        deleteNoteHandler={deleteNoteHandler}
         selectNote={selectNote}
         setSelectNote={setSelectNote}
+        setFilterQuery={setFilterQuery}
       />
       <Workspace
         formVisible={formVisible}

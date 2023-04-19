@@ -14,24 +14,13 @@ const Workspace = ({ selectNote, updateNotes, setSelectNote, formVisible }) => {
     <div className="notes__content">
       {formVisible ? (
         <form className="notes__form content-form">
-          {/* <div className="content-form__row">
-            <label className="content-form__label">Название</label>
-            <input
-              className="content-form__field"
-              id="title"
-              value={selectNote.title}
-              onChange={(e) => changeNote(e.target.value, "title")}
-            />
-          </div> */}
-          <div className="content-form__row">
-            <textarea
-              className="content-form__field"
-              id="text"
-              placeholder="Введите текст..."
-              value={selectNote.text}
-              onChange={(e) => changeNote(e.target.value, "text")}
-            ></textarea>
-          </div>
+          <textarea
+            className="content-form__field"
+            id="text"
+            placeholder="Введите текст..."
+            value={selectNote.text}
+            onChange={(e) => changeNote(e.target.value, "text")}
+          ></textarea>
         </form>
       ) : (
         <div className="preview">
@@ -42,7 +31,11 @@ const Workspace = ({ selectNote, updateNotes, setSelectNote, formVisible }) => {
       )}
     </div>
   ) : (
-    "Нажмите 'Создать заметку'"
+    <div className="notes__content">
+      <span style={{ fontStyle: "italic" }}>
+        Создайте или выберите заметку из списка
+      </span>
+    </div>
   );
 };
 

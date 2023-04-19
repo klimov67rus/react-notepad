@@ -1,35 +1,36 @@
 const Toolbar = ({
   onCreate,
-  setFilterQuery,
   selectNote,
   formVisible,
   setFormVisible,
+  deleteNoteHandler,
 }) => {
   return (
     <div className="notes__toolbar toolbar">
       <div className="toolbar__col">
-        <button type="button" className="note-create" onClick={onCreate}>
+        <button type="button" className="btn" onClick={onCreate}>
           Создать заметку
         </button>
       </div>
-      {selectNote !== false && (
-        <div className="toolbar__col">
-          <button
-            type="button"
-            className="note-create"
-            onClick={() => setFormVisible((prev) => !prev)}
-          >
-            {formVisible ? "Просмотр" : "Редактор"}
-          </button>
-        </div>
-      )}
       <div className="toolbar__col">
-        <label className="toolbar__label">Поиск:</label>
-        <input
-          className="toolbar__field"
-          id="search"
-          onChange={(e) => setFilterQuery(e.target.value)}
-        />
+        <button
+          disabled={!selectNote ? "disabled" : ""}
+          type="button"
+          className="btn"
+          onClick={() => deleteNoteHandler(selectNote.id)}
+        >
+          Удалить
+        </button>
+      </div>
+      <div className="toolbar__col toolbar__col--right">
+        <span>Режим отображения: </span>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => setFormVisible((prev) => !prev)}
+        >
+          {formVisible ? "Редактор" : "Просмотр"}
+        </button>
       </div>
     </div>
   );
