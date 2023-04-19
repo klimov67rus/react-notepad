@@ -17,7 +17,6 @@ const { notes: allItems } = db;
 
 const App = () => {
   const [filterQuery, setFilterQuery] = useState("");
-  const regexp = new RegExp(filterQuery, "gim");
   const notes = useLiveQuery(
     async () =>
       await allItems
