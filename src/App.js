@@ -17,8 +17,15 @@ const { notes: allItems } = db;
 
 const App = () => {
   const [filterQuery, setFilterQuery] = useState("");
+  const regexp = new RegExp(filterQuery, "gim");
   const notes = useLiveQuery(
-    async () => await allItems.where("text").startsWith(filterQuery).toArray(),
+    async () =>
+      await allItems
+        .filter((item) => {
+          const regex = new RegExp(filterQuery, "i");
+          return regex.test(item.text);
+        })
+        .toArray(),
     [filterQuery]
   );
 
