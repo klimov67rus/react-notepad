@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-notepad/static/css/main.4697e5a8.css",
-    "main.js": "/react-notepad/static/js/main.94fd13dc.js",
+    "main.css": "/react-notepad/static/css/main.a5a28f2b.css",
+    "main.js": "/react-notepad/static/js/main.d44a7134.js",
     "index.html": "/react-notepad/index.html",
-    "main.4697e5a8.css.map": "/react-notepad/static/css/main.4697e5a8.css.map",
-    "main.94fd13dc.js.map": "/react-notepad/static/js/main.94fd13dc.js.map"
+    "main.a5a28f2b.css.map": "/react-notepad/static/css/main.a5a28f2b.css.map",
+    "main.d44a7134.js.map": "/react-notepad/static/js/main.d44a7134.js.map"
   },
   "entrypoints": [
-    "static/css/main.4697e5a8.css",
-    "static/js/main.94fd13dc.js"
+    "static/css/main.a5a28f2b.css",
+    "static/js/main.d44a7134.js"
   ]
 }
