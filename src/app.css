@@ -10,15 +10,19 @@ html {
 }
 
 .container {
-  max-width: 1000px;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 480px;
   margin: var(--outer-margin) auto;
 }
 
 .btn {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   background-color: #fff;
   border-radius: 0.2rem;
   border: 0;
+  display: flex;
+  align-items: center;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
@@ -37,6 +41,13 @@ html {
   cursor: initial;
 }
 
+.btn svg {
+  margin-right: 5px;
+}
+.btn svg:last-child {
+  margin-right: 0;
+}
+
 /* LAYOUT */
 
 .notes {
@@ -45,10 +56,20 @@ html {
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.25);
   background-color: #fff;
   border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
 }
+
 .notes__content {
   width: 75%;
+  min-height: var(--h_toolbar);
   padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .notes__content {
+    width: 100%;
+  }
 }
 
 /* Content Form */
@@ -62,6 +83,8 @@ html {
   height: 100%;
   padding: 0.5rem;
   font-size: 1rem;
+  border: 1px solid var(--gray);
+  outline: none;
 }
 
 /* TOOLBAR */
@@ -69,9 +92,13 @@ html {
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  z-index: 100;
 }
 .toolbar__col:not(:last-child) {
   margin-right: 0.5rem;
+}
+.toolbar__col:first-child {
+  margin-right: 0;
 }
 .toolbar__col.toolbar__col--right {
   margin-left: auto;
@@ -82,15 +109,37 @@ html {
   background-color: var(--gray);
 }
 
+.open-sidebar {
+  display: none;
+}
+.close-sidebar-icon {
+  display: none;
+}
+.open-sidebar--active .open-sidebar-icon {
+  display: none;
+}
+.open-sidebar--active .close-sidebar-icon {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .toolbar__col:first-child {
+    margin-right: 0.5rem;
+  }
+  .open-sidebar {
+    display: flex;
+  }
+}
+
 /* NOTE */
 
 .note {
   padding: 0.5rem;
   user-select: none;
-  margin: 0 0.5rem 0;
   border-bottom: 1px solid var(--gray-light);
   padding-bottom: 0.5rem;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  overflow: hidden;
 }
 .note.note--selected,
 .note:hover,
@@ -140,14 +189,30 @@ html {
 
 .sidebar {
   width: 25%;
+  padding: 1rem 0.5rem 0;
   min-height: var(--h_toolbar);
   border-right: 1px solid var(--gray);
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    top: 53px;
+    left: 0;
+    background-color: #fff;
+    transform: translateX(-100%);
+  }
+  .sidebar-visible {
+    transform: translateX(0);
+    width: 70%;
+    box-shadow: 5px 0px 10px 0px rgb(0 0 0 / 30%);
+  }
 }
 
 /* SEARCH NOTE */
 
 .search-note {
-  margin: 1rem 0.5rem 0;
   border-bottom: 1px solid var(--gray-light);
   padding-bottom: 1rem;
 }

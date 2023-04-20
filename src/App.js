@@ -30,6 +30,7 @@ const App = () => {
 
   const [selectNote, setSelectNote] = useState(false);
   const [formVisible, setFormVisible] = useState(true);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
   useEffect(() => {
     if (notes && !notes.length) {
@@ -51,6 +52,7 @@ const App = () => {
       .then((createNote) => {
         setSelectNote(createNote);
       });
+    setFormVisible(true);
   };
 
   // UPDATE
@@ -75,12 +77,15 @@ const App = () => {
         formVisible={formVisible}
         setFormVisible={setFormVisible}
         deleteNoteHandler={deleteNoteHandler}
+        setIsSidebarVisible={setIsSidebarVisible}
+        isSidebarVisible={isSidebarVisible}
       />
       <NoteList
         notes={notes}
         selectNote={selectNote}
         setSelectNote={setSelectNote}
         setFilterQuery={setFilterQuery}
+        isSidebarVisible={isSidebarVisible}
       />
       <Workspace
         formVisible={formVisible}

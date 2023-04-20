@@ -22,3 +22,8 @@ button {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   color: #2c2c2c;
 }
+
+ul,
+ol {
+  list-style-position: inside;
+}

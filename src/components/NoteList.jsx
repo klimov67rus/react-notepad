@@ -7,9 +7,10 @@ const NoteList = ({
   setSelectNote,
   deleteNoteHandler,
   setFilterQuery,
+  isSidebarVisible,
 }) => {
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isSidebarVisible ? "sidebar-visible" : ""}`}>
       <SearchNote setFilterQuery={setFilterQuery} />
       {notes &&
         (notes.length !== 0 ? (
