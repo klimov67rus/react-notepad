@@ -5,7 +5,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import "./app.css";
 
 import Workspace from "./components/Workspace";
-import NoteList from "./components/NoteList";
+import Sidebar from "./components/Sidebar";
 import Toolbar from "./components/Toolbar";
 
 const db = new Dexie("NotesDb");
@@ -80,7 +80,7 @@ const App = () => {
         setIsSidebarVisible={setIsSidebarVisible}
         isSidebarVisible={isSidebarVisible}
       />
-      <NoteList
+      <Sidebar
         notes={notes}
         selectNote={selectNote}
         setSelectNote={setSelectNote}
